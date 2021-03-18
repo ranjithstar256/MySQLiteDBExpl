@@ -66,4 +66,10 @@ public class DBhpr extends SQLiteOpenHelper {
 
         // update table set Location = sloc where Name = 'sname'
     }
+
+    public void dell(String del) {
+       int j = sqLiteDatabase.delete(TABLE_NAME,"Name = '"+del+"'",null);
+        Log.d("dellsta",j+"");
+
+    }
 }

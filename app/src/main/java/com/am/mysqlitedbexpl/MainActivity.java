@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
     EditText edname, edloc,edn;
     EditText ename, eloc;
-    String sname, sloc,n;
+    EditText edelname;
+    String sname, sloc,n,del;
     String dsname, dsloc,dn;
     TextView textView;
     @Override
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         edn= findViewById(R.id.editTextTextPersonName3);
         ename= findViewById(R.id.editTextTextPersonName4);
         eloc= findViewById(R.id.editTextTextPersonName5);
+        edelname= findViewById(R.id.editTextTextPersonName6);
         textView= findViewById(R.id.textView);
         dbhpr = new DBhpr(MainActivity.this);
     }
@@ -48,5 +50,11 @@ public class MainActivity extends AppCompatActivity {
         dsname=ename.getText().toString();
         dsloc=eloc.getText().toString();
         dbhpr.updat(dsname,dsloc);
+    }
+
+    public void sdel(View view) {
+        del=edelname.getText().toString();
+
+        dbhpr.dell(del);
     }
 }

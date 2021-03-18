@@ -2,6 +2,7 @@ package com.am.mysqlitedbexpl;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -24,11 +25,6 @@ public class DBhpr extends SQLiteOpenHelper {
         String tblequr=  "create table "+TABLE_NAME+" ("+COLUMN_ONE+" text ,"+COLUMN_TWO+" text )";
         sqLiteDatabase.execSQL(tblequr);
     }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-    }
-
     public void savedat(String s1, String s2){
         ContentValues contentValues = new ContentValues();
 
@@ -39,4 +35,25 @@ public class DBhpr extends SQLiteOpenHelper {
       Log.i("savestatus",o+"");
     }
 
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    }
+
+    public String getloc(String n) {
+        String f="";
+
+        Cursor c;
+        // Name=?
+        c= sqLiteDatabase.query(TABLE_NAME,null,COLUMN_ONE+"=?",new String[]{n},
+                null,null,null);
+
+        if (c.getCount()<1){
+            return "Not Exists";
+        }
+
+        c.moveToFirst();
+        f= c.getString(c.getColumnIndex(COLUMN_TWO));
+
+        return f;
+    }
 }

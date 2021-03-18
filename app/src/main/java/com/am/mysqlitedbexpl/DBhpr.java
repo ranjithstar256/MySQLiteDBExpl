@@ -41,10 +41,9 @@ public class DBhpr extends SQLiteOpenHelper {
 
     public String getloc(String n) {
         String f="";
-
         Cursor c;
-        // Name=?
-        c= sqLiteDatabase.query(TABLE_NAME,null,COLUMN_ONE+"=?",new String[]{n},
+
+        c= sqLiteDatabase.query(TABLE_NAME,null,COLUMN_ONE+" =? ",new String[]{n},
                 null,null,null);
 
         if (c.getCount()<1){
@@ -55,5 +54,16 @@ public class DBhpr extends SQLiteOpenHelper {
         f= c.getString(c.getColumnIndex(COLUMN_TWO));
 
         return f;
+    }
+
+    public void updat(String sname, String sloc) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_TWO,sloc);
+
+       int o = sqLiteDatabase.update(TABLE_NAME,contentValues,"Name = '"+sname+"'",null);
+
+       Log.d("updsta",o+"");
+
+        // update table set Location = sloc where Name = 'sname'
     }
 }
